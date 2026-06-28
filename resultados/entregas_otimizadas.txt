@@ -1,0 +1,92 @@
+============================================================
+PLANO DE ROTAS DE ENTREGA HOSPITALAR
+============================================================
+Data/hora: 2026-06-28 17:24:40
+
+LEGENDA (unidades e termos)
+  - Deposito = Hospital, sempre a cidade de ID 0; toda rota comeca e
+    termina nele.
+  - Coordenadas (x, y) em pixels; distancias sao euclidianas em pixels.
+  - Demanda = carga a ser entregue na cidade (unidades).
+  - Prioridade: 10 = medicamento critico (urgente); 1 = insumo regular.
+  - Custo logistico = indice que combina a distancia total percorrida e
+    penalidades por violar restricoes (capacidade dos veiculos, autonomia
+    e atraso de entregas urgentes). Quanto MENOR, melhor o plano.
+  - Status da rota: OK; SOBRECARGA (excede capacidade); ou AUTONOMIA
+    EXCEDIDA (excede a distancia maxima do veiculo).
+
+MÉTODO DE PLANEJAMENTO
+  Abordagem: otimização por melhoria iterativa das rotas.
+  Construção inicial das rotas : Aleatória
+  Estratégia de seleção        : Por disputa entre planos candidatos
+  Forma de recombinação        : Preservando a ordem das visitas
+  Ajuste local de rota         : Troca de duas paradas
+  Planos avaliados por ciclo   : 100
+  Intensidade de ajuste local  : 0.6
+  Ciclos de refinamento        : 20000 (limite 20000)
+
+FROTA
+  Veículos disponíveis : 4
+  Veículos utilizados  : 4
+  Capacidade/veículo   : 100.0
+  Autonomia/veículo    : 1200.0
+
+DEPÓSITO (HOSPITAL)
+  Cidade 0 em (x=675, y=250)
+
+CIDADES / CLIENTES (15 no total, 5 críticos)
+  ID | tipo     | x    | y    | demanda | prioridade | veículo | ordem
+   1 | regular  | 541  | 141  |    12.0 |          1 |      V3 |     2
+   2 | regular  | 897  | 248  |    19.0 |          1 |      V2 |     3
+   3 | crítico  | 767  | 320  |    26.0 |         10 |      V1 |     2
+   4 | regular  | 542  | 95   |     7.0 |          1 |      V3 |     3
+   5 | regular  | 438  | 331  |    14.0 |          1 |      V4 |     3
+   6 | crítico  | 829  | 334  |    21.0 |         10 |      V1 |     3
+   7 | regular  | 748  | 302  |    28.0 |          1 |      V1 |     1
+   8 | regular  | 455  | 368  |     9.0 |          1 |      V4 |     2
+   9 | crítico  | 535  | 164  |    16.0 |         10 |      V2 |     1
+  10 | regular  | 831  | 368  |    23.0 |          1 |      V1 |     4
+  11 | regular  | 563  | 393  |    30.0 |          1 |      V4 |     1
+  12 | crítico  | 585  | 141  |    11.0 |         10 |      V3 |     1
+  13 | regular  | 615  | 385  |    18.0 |          1 |      V3 |     5
+  14 | regular  | 636  | 60   |    25.0 |          1 |      V3 |     4
+  15 | crítico  | 430  | 116  |     6.0 |         10 |      V2 |     2
+
+RESUMO DO PLANO
+  Custo logístico do plano inicial : 22652.67
+  Custo logístico do plano final   : 14871.77
+  Distância total percorrida       : 2784.8
+  Carga total entregue             : 265.0
+  Veículos utilizados              : 4 / 4
+
+ROTAS DETALHADAS
+  Veículo 1:
+    Rota          : 0 -> 7 -> 3 -> 6 -> 10 -> 0
+    Paradas       : 4 cidades [7, 3, 6, 10]
+    Carga         : 98.0/100 (folga 2.0)
+    Distância     : 409.0/1200 (folga 791.0)
+    Críticos      : [3, 6]
+    Status        : OK
+  Veículo 2:
+    Rota          : 0 -> 9 -> 15 -> 2 -> 0
+    Paradas       : 3 cidades [9, 15, 2]
+    Carga         : 41.0/100 (folga 59.0)
+    Distância     : 987.1/1200 (folga 212.9)
+    Críticos      : [9, 15]
+    Status        : OK
+  Veículo 3:
+    Rota          : 0 -> 12 -> 1 -> 4 -> 14 -> 13 -> 0
+    Paradas       : 5 cidades [12, 1, 4, 14, 13]
+    Carga         : 73.0/100 (folga 27.0)
+    Distância     : 805.1/1200 (folga 394.9)
+    Críticos      : [12]
+    Status        : OK
+  Veículo 4:
+    Rota          : 0 -> 11 -> 8 -> 5 -> 0
+    Paradas       : 3 cidades [11, 8, 5]
+    Carga         : 53.0/100 (folga 47.0)
+    Distância     : 583.7/1200 (folga 616.3)
+    Críticos      : nenhum
+    Status        : OK
+
+SEQUÊNCIA GERAL DE ENTREGAS (ordem consolidada das cidades): [7, 3, 6, 10, 9, 15, 2, 12, 1, 4, 14, 13, 11, 8, 5]

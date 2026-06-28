@@ -1,0 +1,338 @@
+{
+  "metadata": {
+    "datetime": "2026-06-28 17:24:40",
+    "problema": "Planejamento de rotas de entrega hospitalar",
+    "unidades": {
+      "coordenadas": "pixels",
+      "distancia": "pixels (euclidiana)",
+      "demanda": "unidades de carga"
+    },
+    "legenda": {
+      "deposito": "Hospital (cidade de ID 0); toda rota começa e termina nele",
+      "prioridade": {
+        "10": "medicamento crítico (urgente)",
+        "1": "insumo regular"
+      },
+      "custo_logistico": "índice que combina a distância total percorrida e penalidades por violar restrições (capacidade dos veículos, autonomia e atraso de entregas urgentes); quanto menor, melhor o plano",
+      "status": "OK, SOBRECARGA (excede capacidade) ou AUTONOMIA EXCEDIDA"
+    }
+  },
+  "metodo_planejamento": {
+    "abordagem": "otimização por melhoria iterativa das rotas",
+    "construcao_inicial": "Aleatória",
+    "estrategia_selecao": "Por disputa entre planos candidatos",
+    "forma_recombinacao": "Preservando a ordem das visitas",
+    "ajuste_local": "Troca de duas paradas",
+    "planos_avaliados_por_ciclo": 100,
+    "intensidade_ajuste_local": 0.6,
+    "ciclos_refinamento": 20000,
+    "ciclos_refinamento_limite": 20000
+  },
+  "frota": {
+    "veiculos_disponiveis": 4,
+    "veiculos_utilizados": 4,
+    "capacidade_por_veiculo": 100.0,
+    "autonomia_por_veiculo": 1200.0
+  },
+  "deposito": {
+    "id": 0,
+    "x": 675,
+    "y": 250
+  },
+  "cidades": [
+    {
+      "id": 1,
+      "tipo": "regular",
+      "x": 541,
+      "y": 141,
+      "demanda": 12.0,
+      "prioridade": 1,
+      "veiculo": 3,
+      "ordem_visita": 2
+    },
+    {
+      "id": 2,
+      "tipo": "regular",
+      "x": 897,
+      "y": 248,
+      "demanda": 19.0,
+      "prioridade": 1,
+      "veiculo": 2,
+      "ordem_visita": 3
+    },
+    {
+      "id": 3,
+      "tipo": "crítico",
+      "x": 767,
+      "y": 320,
+      "demanda": 26.0,
+      "prioridade": 10,
+      "veiculo": 1,
+      "ordem_visita": 2
+    },
+    {
+      "id": 4,
+      "tipo": "regular",
+      "x": 542,
+      "y": 95,
+      "demanda": 7.0,
+      "prioridade": 1,
+      "veiculo": 3,
+      "ordem_visita": 3
+    },
+    {
+      "id": 5,
+      "tipo": "regular",
+      "x": 438,
+      "y": 331,
+      "demanda": 14.0,
+      "prioridade": 1,
+      "veiculo": 4,
+      "ordem_visita": 3
+    },
+    {
+      "id": 6,
+      "tipo": "crítico",
+      "x": 829,
+      "y": 334,
+      "demanda": 21.0,
+      "prioridade": 10,
+      "veiculo": 1,
+      "ordem_visita": 3
+    },
+    {
+      "id": 7,
+      "tipo": "regular",
+      "x": 748,
+      "y": 302,
+      "demanda": 28.0,
+      "prioridade": 1,
+      "veiculo": 1,
+      "ordem_visita": 1
+    },
+    {
+      "id": 8,
+      "tipo": "regular",
+      "x": 455,
+      "y": 368,
+      "demanda": 9.0,
+      "prioridade": 1,
+      "veiculo": 4,
+      "ordem_visita": 2
+    },
+    {
+      "id": 9,
+      "tipo": "crítico",
+      "x": 535,
+      "y": 164,
+      "demanda": 16.0,
+      "prioridade": 10,
+      "veiculo": 2,
+      "ordem_visita": 1
+    },
+    {
+      "id": 10,
+      "tipo": "regular",
+      "x": 831,
+      "y": 368,
+      "demanda": 23.0,
+      "prioridade": 1,
+      "veiculo": 1,
+      "ordem_visita": 4
+    },
+    {
+      "id": 11,
+      "tipo": "regular",
+      "x": 563,
+      "y": 393,
+      "demanda": 30.0,
+      "prioridade": 1,
+      "veiculo": 4,
+      "ordem_visita": 1
+    },
+    {
+      "id": 12,
+      "tipo": "crítico",
+      "x": 585,
+      "y": 141,
+      "demanda": 11.0,
+      "prioridade": 10,
+      "veiculo": 3,
+      "ordem_visita": 1
+    },
+    {
+      "id": 13,
+      "tipo": "regular",
+      "x": 615,
+      "y": 385,
+      "demanda": 18.0,
+      "prioridade": 1,
+      "veiculo": 3,
+      "ordem_visita": 5
+    },
+    {
+      "id": 14,
+      "tipo": "regular",
+      "x": 636,
+      "y": 60,
+      "demanda": 25.0,
+      "prioridade": 1,
+      "veiculo": 3,
+      "ordem_visita": 4
+    },
+    {
+      "id": 15,
+      "tipo": "crítico",
+      "x": 430,
+      "y": 116,
+      "demanda": 6.0,
+      "prioridade": 10,
+      "veiculo": 2,
+      "ordem_visita": 2
+    }
+  ],
+  "resumo": {
+    "custo_plano_inicial": 22652.67,
+    "custo_plano_final": 14871.77,
+    "distancia_total": 2784.84,
+    "carga_total_entregue": 265.0,
+    "veiculos_utilizados": 4
+  },
+  "rotas": [
+    {
+      "veiculo": 1,
+      "sequencia": [
+        0,
+        7,
+        3,
+        6,
+        10,
+        0
+      ],
+      "cidades": [
+        7,
+        3,
+        6,
+        10
+      ],
+      "paradas": 4,
+      "carga": 98.0,
+      "capacidade": 100.0,
+      "folga_carga": 2.0,
+      "distancia": 409.02,
+      "autonomia": 1200.0,
+      "folga_distancia": 790.98,
+      "cidades_criticas": [
+        3,
+        6
+      ],
+      "status": [
+        "OK"
+      ]
+    },
+    {
+      "veiculo": 2,
+      "sequencia": [
+        0,
+        9,
+        15,
+        2,
+        0
+      ],
+      "cidades": [
+        9,
+        15,
+        2
+      ],
+      "paradas": 3,
+      "carga": 41.0,
+      "capacidade": 100.0,
+      "folga_carga": 59.0,
+      "distancia": 987.06,
+      "autonomia": 1200.0,
+      "folga_distancia": 212.94,
+      "cidades_criticas": [
+        9,
+        15
+      ],
+      "status": [
+        "OK"
+      ]
+    },
+    {
+      "veiculo": 3,
+      "sequencia": [
+        0,
+        12,
+        1,
+        4,
+        14,
+        13,
+        0
+      ],
+      "cidades": [
+        12,
+        1,
+        4,
+        14,
+        13
+      ],
+      "paradas": 5,
+      "carga": 73.0,
+      "capacidade": 100.0,
+      "folga_carga": 27.0,
+      "distancia": 805.08,
+      "autonomia": 1200.0,
+      "folga_distancia": 394.92,
+      "cidades_criticas": [
+        12
+      ],
+      "status": [
+        "OK"
+      ]
+    },
+    {
+      "veiculo": 4,
+      "sequencia": [
+        0,
+        11,
+        8,
+        5,
+        0
+      ],
+      "cidades": [
+        11,
+        8,
+        5
+      ],
+      "paradas": 3,
+      "carga": 53.0,
+      "capacidade": 100.0,
+      "folga_carga": 47.0,
+      "distancia": 583.67,
+      "autonomia": 1200.0,
+      "folga_distancia": 616.33,
+      "cidades_criticas": [],
+      "status": [
+        "OK"
+      ]
+    }
+  ],
+  "sequencia_geral_entregas": [
+    7,
+    3,
+    6,
+    10,
+    9,
+    15,
+    2,
+    12,
+    1,
+    4,
+    14,
+    13,
+    11,
+    8,
+    5
+  ]
+}
